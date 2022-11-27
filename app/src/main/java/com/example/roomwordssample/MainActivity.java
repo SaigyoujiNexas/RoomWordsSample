@@ -1,5 +1,7 @@
 package com.example.roomwordssample;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -21,10 +23,21 @@ public class MainActivity extends AppCompatActivity {
     private List<stringword>mList = new ArrayList<>();
     private worldviewmodel mWorldviewmodel;
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
+    private ActivityResultLauncher<Intent> launcher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        launcher =
+                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), (result ->{
+                    if(RESULT_OK == result.getResultCode()){
+                        var word = new world();
+                        assert result.getData() != null;
+                        word.worlds = result.getData().getStringExtra(MainActivity2.EXTRA_REPLY);
+                        mWorldviewmodel.insert(word);
+                    }
+                }));
         WordViewHolder adapter = new WordViewHolder(mList);
         mWorldviewmodel = new ViewModelProvider(this).get(worldviewmodel.class);
         mWorldviewmodel.getAllWords().observe(this, new Observer<List<world>>() {
@@ -50,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener( view -> {
             Intent intent = new Intent(MainActivity.this, MainActivity2.class);
             Log.d("nihao","q");
-            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+            launcher.launch(intent);
         });
     }
 

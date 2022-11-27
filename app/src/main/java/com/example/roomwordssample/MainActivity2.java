@@ -31,7 +31,6 @@ public class MainActivity2 extends AppCompatActivity {
                 }
                 else {
                     String word = mEditWordView.getText().toString();
-                    new WordRepository(getApplication()).insert((world) mEditWordView.getText());
                     replyIntent.putExtra(EXTRA_REPLY, word);
                     setResult(RESULT_OK, replyIntent);
                 }
