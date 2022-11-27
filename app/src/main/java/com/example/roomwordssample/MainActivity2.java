@@ -27,7 +27,6 @@ public class MainActivity2 extends AppCompatActivity {
                 if (TextUtils.isEmpty(mEditWordView.getText())) {
 
                     setResult(RESULT_CANCELED, replyIntent);
-
                 }
                 else {
                     String word = mEditWordView.getText().toString();

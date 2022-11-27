@@ -11,6 +11,6 @@ public class world {
     @PrimaryKey(autoGenerate = true)
     public int uid;
     @ColumnInfo
-    public String worlds;
+    public java.lang.String worlds;
 
 }
