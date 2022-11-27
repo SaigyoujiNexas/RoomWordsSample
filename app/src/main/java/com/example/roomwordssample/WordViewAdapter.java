@@ -14,10 +14,14 @@ public class WordViewAdapter extends ListAdapter<String, WordViewAdapter.WordVie
     public WordViewAdapter(@NonNull DiffUtil.ItemCallback<String> diffCallback) {
         super(diffCallback);
     }
-
     @NonNull
     @Override
     public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if(viewType == 0){
+            // WordWithImageHolder.create()
+        }else if(viewType == 1){
+            // WordInScreenEndHolder.create();
+        }
         return WordViewHolder.create(parent);
     }
 

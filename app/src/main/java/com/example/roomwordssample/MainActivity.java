@@ -35,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
                 }));
         var adapter = new WordViewAdapter(new WordViewAdapter.WordDiff());
         mWorldviewmodel = new ViewModelProvider(this).get(worldviewmodel.class);
-        mWorldviewmodel.getAllWords().observe(this, (data -> {
-            adapter.submitList(data);
-        }));
+
+        mWorldviewmodel.getAllWords().observe(this, (adapter::submitList));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
